@@ -21,11 +21,11 @@ public class FractalKinectHandler : MonoBehaviour
     }
  	private void Start () {
         Vector3 vector = new Vector3(255,255,255) - new Vector3(1,1,1);
-       for(int i=0; i<5; i++) {
-        rightHand[i].SpawnFractal(vector, Random.Range(0,5));
-        rightHand[i].SpawnFractal(vector, Random.Range(0,5));
-        rightHand[i].SpawnFractal(vector, Random.Range(0,5));
-        rightHand[i].SpawnFractal(vector, Random.Range(0,5));
+       for(int i=0; i<rightHand.Length; i++) {
+        rightHand[i].SpawnFractal(vector, 4);
+        rightHand[i].SpawnFractal(vector, 3);
+        rightHand[i].SpawnFractal(vector, 2);
+        rightHand[i].SpawnFractal(vector, 1);
        }
 	}
 
