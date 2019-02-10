@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,38 +28,38 @@ public class Fractal : MonoBehaviour
 	};
 
 	private static Vector3[] childOddDirections = {
-//		Vector3.back,
 		Vector3.right,
 		Vector3.left,
 		Vector3.forward,
-//		Vector3.up,
-//		Vector3.down
+		// Vector3.back,
+		// Vector3.up,
+		// Vector3.down
 	};
 	private static Quaternion[] childOddOrientations = {
-//		Quaternion.identity,
 		Quaternion.Euler(0f, 0f, -90f),
 		Quaternion.Euler(0f, 0f, 90f),
-		Quaternion.identity,
-//		Quaternion.identity,
-//		Quaternion.identity,
+		Quaternion.Euler(90f, 0f, 0f),
+		// Quaternion.Euler(-90f, 0f, 0f)
+		// Quaternion.identity,
+		// Quaternion.identity,
+
 	};
 
-
-private static Vector3[] childEvenDirections = {
-		Vector3.back,
+     private static Vector3[] childEvenDirections = {
 //		Vector3.right,
 //		Vector3.left,
 //		Vector3.forward,
+		Vector3.back,
 		Vector3.up,
-		Vector3.down
+		// Vector3.down
 	};
 	private static Quaternion[] childEvenOrientations = {
-		Quaternion.identity,
 		// Quaternion.Euler(0f, 0f, -90f),
 		// Quaternion.Euler(0f, 0f, 90f),
+		// Quaternion.Euler(90f, 0f, 0f),
+		Quaternion.Euler(-90f, 0f, 0f),
+		Quaternion.identity,
 		// Quaternion.identity,
-		Quaternion.identity,
-		Quaternion.identity,
 	};
 
  	private void Start () {
@@ -79,13 +80,13 @@ private static Vector3[] childEvenDirections = {
     
 	private IEnumerator CreateChildren (Vector3[] directions, Quaternion[] orientations) {
 		for (int i = 0; i < directions.Length; i++) {
-			yield return new WaitForSeconds(0.01f);
+			yield return new WaitForSeconds(0.05f);
 			new GameObject("Fractal Child").AddComponent<Fractal>().
 				Initialize(this, directions[i], orientations[i]);
 		}
 	}
 	public void Initialize (Fractal parent, Vector3 direction, Quaternion orientation) {
-		setProperties(parent.transform, parent.max_depth, parent.child_scale, parent.mesh, parent.material);
+		SetProperties(parent.transform, parent.max_depth, parent.child_scale, parent.mesh, parent.material);
 		
 		depth = parent.depth + 1;
         transform.localScale = Vector3.one * child_scale;
@@ -94,19 +95,28 @@ private static Vector3[] childEvenDirections = {
 	}
 
     // Settings
-    public void setProperties (Transform origin, int max_depth, float child_scale, Mesh mesh, Material material) {
+    public void SetProperties (Transform origin, int max_depth, float child_scale, Mesh mesh, Material material) {
+
+        transform.parent = origin;
+		transform.localScale = origin.localScale;
+		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
 
 		this.mesh = mesh;
 		this.material = material;
 		this.max_depth = max_depth;
 		this.depth = 0;
-        transform.parent = origin;
         this.child_scale = child_scale;
 	}
 
+   public void Rotate(float angle)
+    {
+
+    }
+
 	public void Update() {
-		if(depth == 0) {
-			transform.Rotate(Vector3.up* 5 * Time.deltaTime);
-		}
+		// if(depth == 0) {
+		// 	transform.Rotate(Vector3.up* 5 * Time.deltaTime);
+		// }
 	}
 }

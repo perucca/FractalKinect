@@ -20,14 +20,22 @@ public class FractalSpawner : MonoBehaviour
         Material material = chooseMaterial();
  
        	GameObject go = new GameObject("Fractal");
-        go.AddComponent<Fractal>().setProperties(transform, depth, child_scale, mesh, material);
-        
-		go.transform.localPosition = Vector3.up* fractal_floors.Count + transform.position;
+        go.AddComponent<Fractal>().SetProperties(transform, depth, child_scale, mesh, material);
+
+
         if(fractal_floors.Count > 0) {
+            Transform previousFractal = fractal_floors[fractal_floors.Count-1].transform;
             float angle = Random.Range(angle_min,angle_max);
-            go.transform.RotateAround(fractal_floors[fractal_floors.Count-1].transform.position, new Vector3(0.0f,0.0f,1.0f), angle);
-            go.transform.localRotation = Quaternion.Euler(0, 0, angle);
-        }
+
+		    Quaternion rotation = Quaternion.Euler(0,0,angle);
+		    Vector3 direction = rotation * Vector3.up*fractal_floors.Count*go.transform.localScale.z;
+            go.transform.Rotate(Vector3.up*angle, Space.World);
+            go.transform.localPosition += direction; 
+
+
+            // go.GetComponent<Fractal>().Rotate(Random.Range(angle_min,angle_max));
+        } 
+
         fractal_floors.Add(go); 
        
 

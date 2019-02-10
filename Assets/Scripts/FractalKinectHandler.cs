@@ -22,7 +22,7 @@ public class FractalKinectHandler : MonoBehaviour
  	private void Start () {
         Vector3 vector = new Vector3(255,255,255) - new Vector3(1,1,1);
        for(int i=0; i<rightHand.Length; i++) {
-           for(int j=0; j<5; j++) {
+           for(int j=0; j<6; j++) {
                 rightHand[i].SpawnFractal(vector, Random.Range(1,5));
            }
        }
