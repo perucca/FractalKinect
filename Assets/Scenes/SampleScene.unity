@@ -212,8 +212,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes:
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   materials:
   - {fileID: 2100000, guid: 379c1698c57a48441800eb43767f4a01, type: 2}
+  - {fileID: 2100000, guid: 886864d4e267a6a4889f2a16cd63d327, type: 2}
   max_floor: 10
   child_scale: 0.5
   angle_min: -30
