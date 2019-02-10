@@ -11,19 +11,19 @@ public class Fractal : MonoBehaviour
 	private Material material;
     private int depth;
 	private static Vector3[] childDirections = {
-		Vector3.back,
+//		Vector3.back,
 		Vector3.right,
 		Vector3.left,
-		Vector3.forward,
-		Vector3.up,
-		Vector3.down
+//		Vector3.forward,
+//		Vector3.up,
+//		Vector3.down
 	};
 
 	private static Vector3[] rootDirections = {
-		Vector3.back,
+//		Vector3.back,
 		Vector3.right,
 		Vector3.left,
-		Vector3.forward
+//		Vector3.forward
 	};
 
 
