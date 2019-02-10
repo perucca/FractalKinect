@@ -8,6 +8,8 @@ public class FractalSpawner : MonoBehaviour
     [SerializeField] private  Material[] materials;
     [SerializeField] private  int max_floor = 10;
     [SerializeField] private  float child_scale = 0.5f;
+    [SerializeField] private  float angle_min = -25.0f;
+    [SerializeField] private  float angle_max = 25.0f;
 
     private List<GameObject> fractal_floors = new List<GameObject>();
  
@@ -22,7 +24,7 @@ public class FractalSpawner : MonoBehaviour
         
 		go.transform.localPosition = Vector3.up* fractal_floors.Count + transform.position;
         if(fractal_floors.Count > 0) {
-            float angle = Random.Range(-25f,25f);
+            float angle = Random.Range(angle_min,angle_max);
             go.transform.RotateAround(fractal_floors[fractal_floors.Count-1].transform.position, new Vector3(0.0f,0.0f,1.0f), angle);
             go.transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
