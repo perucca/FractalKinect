@@ -15,13 +15,15 @@ public class FractalSpawner : MonoBehaviour
 
     private List<GameObject> fractal_floors = new List<GameObject>();
  
-    public void SpawnFractal(Vector3 movement, int depth) {
+    public void SpawnFractal(Vector3 movement, float depth) {
                 
         Debug.Log("SpawnFractal: "+ gameObject.name);
         Mesh mesh = chooseMesh();
         Material material = chooseMaterial();
- 
-       	GameObject go = new GameObject("Fractal");
+
+
+
+          GameObject go = new GameObject("Fractal");
 
 
         if(fractal_floors.Count > 0) {
@@ -42,15 +44,15 @@ public class FractalSpawner : MonoBehaviour
              go.AddComponent<Fractal>().SetProperties(transform, depth, child_scale, mesh, material);
          }
 
-        fractal_floors.Add(go); 
-       
+        fractal_floors.Add(go);
 
-        if(fractal_floors.Count >= max_floor) {
-            //Démarrer cooroutine de destruction
+        if (fractal_floors.Count >= max_floor)
+        {
+            Destroy(fractal_floors[0], 5);
             fractal_floors.Clear();
         }
-    }
 
+    }
 
     private Material chooseMaterial() {
         return materials[Random.Range(0,materials.Length)];

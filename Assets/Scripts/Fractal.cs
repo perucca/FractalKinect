@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Fractal : MonoBehaviour
 {
-	[SerializeField] private int max_depth;
+	[SerializeField] private float max_depth;
     [SerializeField] private float child_scale;
     
 	private Mesh mesh;
 	private Material material;
-    private int depth;
+    private float depth;
 
 	private static Vector3[] rootDirections = {
 		Vector3.back,
@@ -95,7 +95,7 @@ public class Fractal : MonoBehaviour
 	}
 
     // Settings
-    public void SetProperties (Transform origin, int max_depth, float child_scale, Mesh mesh, Material material) {
+    public void SetProperties (Transform origin, float max_depth, float child_scale, Mesh mesh, Material material) {
 
 		/*
         transform.parent = origin;
@@ -117,8 +117,8 @@ public class Fractal : MonoBehaviour
     }
 
 	public void Update() {
-		// if(depth == 0) {
-		// 	transform.Rotate(Vector3.up* 5 * Time.deltaTime);
-		// }
+		 if(depth == 0) {
+		 	transform.Rotate(Vector3.up* 5 * Time.deltaTime);
+		 }
 	}
 }
