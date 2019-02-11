@@ -10,6 +10,8 @@ public class FractalSpawner : MonoBehaviour
     [SerializeField] private  float child_scale = 0.5f;
     [SerializeField] private  float angle_min = -25.0f;
     [SerializeField] private  float angle_max = 25.0f;
+    [SerializeField] private  float size_ratio = 1.0f;
+    
 
     private List<GameObject> fractal_floors = new List<GameObject>();
  
@@ -20,21 +22,25 @@ public class FractalSpawner : MonoBehaviour
         Material material = chooseMaterial();
  
        	GameObject go = new GameObject("Fractal");
-        go.AddComponent<Fractal>().SetProperties(transform, depth, child_scale, mesh, material);
 
 
         if(fractal_floors.Count > 0) {
             Transform previousFractal = fractal_floors[fractal_floors.Count-1].transform;
+            go.AddComponent<Fractal>().SetProperties(previousFractal, depth, child_scale, mesh, material);
             float angle = Random.Range(angle_min,angle_max);
 
-		    Quaternion rotation = Quaternion.Euler(0,0,angle);
-		    Vector3 direction = rotation * Vector3.up*fractal_floors.Count*go.transform.localScale.z;
-            go.transform.Rotate(Vector3.up*angle, Space.World);
-            go.transform.localPosition += direction; 
+		    //Quaternion rotation = Quaternion.Euler(0,0,angle);
+            go.transform.Rotate(Vector3.right*angle);
+            go.transform.localPosition = (previousFractal.localScale.z)* size_ratio * previousFractal.transform.up;
+		    //Vector3 direction = rotation * previousFractal.transform.forward;
+            // go.transform.localPosition = direction; 
 
 
             // go.GetComponent<Fractal>().Rotate(Random.Range(angle_min,angle_max));
         } 
+         else {
+             go.AddComponent<Fractal>().SetProperties(transform, depth, child_scale, mesh, material);
+         }
 
         fractal_floors.Add(go); 
        

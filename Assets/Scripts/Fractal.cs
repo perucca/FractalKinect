@@ -97,8 +97,10 @@ public class Fractal : MonoBehaviour
     // Settings
     public void SetProperties (Transform origin, int max_depth, float child_scale, Mesh mesh, Material material) {
 
+		/*
         transform.parent = origin;
-		transform.localScale = origin.localScale;
+		transform.localScale = origin.localScale;*/
+		transform.SetParent(origin, false);
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
 
